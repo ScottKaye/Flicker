@@ -13,25 +13,39 @@ namespace FlickerDemo
 		static void Main(string[] args)
 		{
 			var flicker = new Renderer();
-			var text = new TextElement
+			var text = new TextElement(15, 10, 20, 5)
 			{
-				Text = "En garde you guy",
-				X = 15,
-				Y = 10,
-				Width = 20,
-				Height = 5,
-				Background = ConsoleColor.DarkGray
+				Background = ConsoleColor.DarkBlue
+			};
+
+			var text2 = new TextElement(0, 0, 40, 4)
+			{
+				Text = "Test text",
+				Background = ConsoleColor.Gray
 			};
 
 			flicker.Register(text);
+			flicker.Register(text2);
 			flicker.Render();
 
 			Task.Run(async () =>
 			{
-				return;
 				while (true)
 				{
 					await Task.Delay(100);
+					text.Text = Environment.TickCount.ToString();
+					text.Render();
+				}
+			});
+
+			Task.Run(async () =>
+			{
+				while (true)
+				{
+					await Task.Delay(1000);
+					text2.Text = Environment.TickCount.ToString();
+					text2.Render();
+
 					flicker.Render();
 				}
 			});

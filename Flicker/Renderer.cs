@@ -12,6 +12,7 @@ namespace Flicker
 	public class Renderer
 	{
 		private List<IRenderable> RenderItems { get; set; } = new List<IRenderable>();
+		internal IRenderable SelectedItem { get; private set; }
 
 		public Renderer()
 		{
@@ -23,7 +24,7 @@ namespace Flicker
 			Console.ResetColor();
 			Console.Clear();
 
-			foreach(var el in RenderItems)
+			foreach (var el in RenderItems)
 			{
 				el.Render();
 			}
@@ -31,6 +32,8 @@ namespace Flicker
 
 		public bool Register(Element element)
 		{
+			element.Renderer = this;
+			SelectedItem = element;
 			RenderItems.Add(element);
 			return true;
 		}

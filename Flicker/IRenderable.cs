@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Flicker
 {
-	internal interface IRenderable
+	public interface IRenderable
 	{
 		void Render();
 	}

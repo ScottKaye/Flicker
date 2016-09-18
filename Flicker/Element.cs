@@ -11,35 +11,54 @@ namespace Flicker
 {
 	public abstract class Element : IRenderable
 	{
-		public int X { get; set; }
-		public int Y { get; set; }
-		public int Width { get; set; } = 1;
-		public int Height { get; set; } = 1;
+		public readonly int X;
+		public readonly int Y;
+		public readonly int Width;
+		public readonly int Height;
+		internal Renderer Renderer { get; set; }
 		public bool Border { get; set; }
-		public int Padding { get; set; }
+		public int Padding { get; set; } = 1; // Must be at least 1 (to make room for header), TODO enforce this
 		public ConsoleColor Foreground { get; set; } = ConsoleColor.White;
 		public ConsoleColor Background { get; set; } = ConsoleColor.Black;
+
+		public Element(int x, int y, int width, int height)
+		{
+			X = x;
+			Y = y;
+			Width = width;
+			Height = height;
+		}
 
 		protected abstract void CustomRender();
 
 		/// <summary>
 		/// Draw this element
 		/// </summary>
-		void IRenderable.Render()
+		public void Render()
 		{
-			Console.SetCursorPosition(0, 0);
 			Console.ForegroundColor = Foreground;
 			Console.BackgroundColor = Background;
 			Console.CursorLeft = X;
 			Console.CursorTop = Y;
-			for (int i = 0; i < Height; ++i)
+
+			if (Renderer.SelectedItem == this)
+			{
+				Console.Write('*');
+				Console.WriteLine(new string(' ', Width - 1));
+			}
+			else
 			{
 				Console.WriteLine(new string(' ', Width));
-				Console.CursorLeft = X;
 			}
 
-			Console.CursorLeft = X;
-			Console.CursorTop = Y;
+			for (int i = 1; i < Height; ++i)
+			{
+				Console.CursorLeft = X;
+				Console.WriteLine(new string(' ', Width));
+			}
+
+			Console.CursorLeft = X + Padding * 2;
+			Console.CursorTop = Y + Padding;
 
 			CustomRender();
 
