@@ -63,6 +63,8 @@ namespace FlickerDemo
 			};
 
 			flicker.Register(menu);
+			flicker.Render();
+
 			flicker.Register(text);
 			flicker.Render();
 		}

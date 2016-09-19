@@ -57,18 +57,25 @@ namespace Flicker
 				Y,
 				Width,
 				Height,
-				Border
+				' '
 			);
 
 			if (Border != ' ')
 			{
-				Tools.Console.Fill(
-					X + 1,
-					Y + 1,
-					Width - 2,
-					Height - 2,
-					' '
-				);
+				// Top and bottom borders
+				Console.CursorLeft = X;
+				Console.CursorTop = Y;
+				Console.Write(new string(Border, Width));
+				Console.CursorLeft = X;
+				Console.CursorTop = Y + Height - 1;
+				Console.Write(new string(Border, Width));
+
+				// Left and right borders
+				for (int y = Y; y < Y + Height - 1; ++y)
+				{
+					Tools.Console.WriteAt(X, y, Border.ToString());
+					Tools.Console.WriteAt(X + Width - 1, y, Border.ToString());
+				}
 			}
 
 			if (selected)
