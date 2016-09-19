@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flicker
 {
@@ -56,6 +51,7 @@ namespace Flicker
 					case ConsoleKey.RightArrow:
 						SelectedIndex = (++SelectedIndex).Wrap(0, RenderItems.Count - 1);
 						break;
+
 					case ConsoleKey.LeftArrow:
 						SelectedIndex = (--SelectedIndex).Wrap(0, RenderItems.Count - 1);
 						break;

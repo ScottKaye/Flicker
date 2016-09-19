@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flicker
 {
@@ -23,9 +19,11 @@ namespace Flicker
 				case ConsoleKey.UpArrow:
 					SelectedIndex = (--SelectedIndex).Wrap(0, Items.Count - 1);
 					break;
+
 				case ConsoleKey.DownArrow:
 					SelectedIndex = (++SelectedIndex).Wrap(0, Items.Count - 1);
 					break;
+
 				case ConsoleKey.Enter:
 					Items[SelectedIndex].Method();
 					break;
