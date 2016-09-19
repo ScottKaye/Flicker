@@ -30,6 +30,8 @@ namespace Flicker
 			Height = height;
 		}
 
+		// TODO float constructor that uses percentages of Console.BufferWidth and Height
+
 		protected virtual void CustomRender()
 		{
 			return;

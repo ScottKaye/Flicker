@@ -13,7 +13,6 @@ namespace Flicker
 	{
 		private List<IRenderable> RenderItems { get; set; } = new List<IRenderable>();
 		private int SelectedIndex { get; set; }
-		private bool Exit { get; set; }
 
 		public Renderer()
 		{
@@ -25,14 +24,21 @@ namespace Flicker
 
 		public void Render()
 		{
-			while (!Exit)
+			while (true)
 			{
 				Console.ResetColor();
 				Console.Clear();
 
-				foreach (var el in RenderItems)
+				try
 				{
-					el.Render(RenderItems[SelectedIndex] == el);
+					foreach (var el in RenderItems)
+					{
+						el.Render(RenderItems[SelectedIndex] == el);
+					}
+				}
+				catch
+				{
+					// Nom
 				}
 
 				Poll();
