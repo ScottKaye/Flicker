@@ -12,6 +12,9 @@ namespace Flicker
 			: base(x, y, width, height)
 		{ }
 
+		public MenuElement(float x, float y, float width, float height)
+			: base(x, y, width, height) { }
+
 		public override void HandleKey(ConsoleKeyInfo key)
 		{
 			switch (key.Key)

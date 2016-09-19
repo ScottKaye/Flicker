@@ -8,8 +8,10 @@ namespace Flicker
 		public bool Wrap { get; set; } = true;
 
 		public TextElement(int x, int y, int width, int height)
-			: base(x, y, width, height)
-		{ }
+			: base(x, y, width, height) { }
+
+		public TextElement(float x, float y, float width, float height)
+			: base(x, y, width, height) { }
 
 		protected override void CustomRender()
 		{

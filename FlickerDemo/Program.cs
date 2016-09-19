@@ -57,10 +57,21 @@ namespace FlickerDemo
 				}
 			};
 
-			flicker.Register(menu);
-			flicker.Render();
+			var half1 = new TextElement(.5f, .5f, .5f, .5f)
+			{
+				Background = ConsoleColor.Blue
+			};
 
+			var half2 = new TextElement(0, 0, .5f, .5f)
+			{
+				Background = ConsoleColor.Green
+			};
+
+			flicker.Register(half1);
+			flicker.Register(half2);
+			flicker.Register(menu);
 			flicker.Register(text);
+			menu.Select();
 			flicker.Render();
 		}
 	}

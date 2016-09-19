@@ -24,6 +24,13 @@ namespace Flicker
 		}
 
 		// TODO float constructor that uses percentages of Console.BufferWidth and Height
+		public Element(float x, float y, float width, float height)
+		{
+			X = (int)(Console.BufferWidth * x);
+			Y = (int)(Console.BufferHeight * y);
+			Width = (int)(Console.BufferWidth * width);
+			Height = (int)(Console.BufferHeight * height);
+		}
 
 		protected virtual void CustomRender()
 		{
