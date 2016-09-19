@@ -21,7 +21,7 @@ namespace Flicker
 
 			foreach (var line in Text.Chunks(Width - Padding * 4))
 			{
-				Console.Write(line);
+				Console.Write(line.Trim());
 				++Console.CursorTop;
 				Console.CursorLeft = X + Padding * 2;
 			}
