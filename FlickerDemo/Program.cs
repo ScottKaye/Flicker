@@ -15,42 +15,56 @@ namespace FlickerDemo
 			var flicker = new Renderer();
 			var text = new TextElement(15, 10, 20, 5)
 			{
-				Background = ConsoleColor.DarkBlue
+				Background = ConsoleColor.DarkBlue,
+				Text = "Nothing"
 			};
 
-			var text2 = new TextElement(0, 0, 40, 4)
+			var menu = new MenuElement(5, 5, 15, 6)
 			{
-				Text = "Test text",
-				Background = ConsoleColor.Gray
+				Border = '@',
+				Items =
+				{
+					new MenuItem
+					{
+						Method = () =>
+						{
+							text.Visible = !text.Visible;
+						},
+						Label = "Toggle text"
+					},
+					new MenuItem
+					{
+						Method = () =>
+						{
+							text.Select();
+						},
+						Label = "Select text"
+					},
+					new MenuItem
+					{
+						Method = () =>
+						{
+							text.Text = Environment.TickCount.ToString();
+						},
+						Label = "Update text"
+					},
+					new MenuItem
+					{
+						Method = () =>
+						{
+							string result;
+							new InputElement(out result, "Enter your name: ");
+
+							text.Text = $"Hello, {result}!";
+						},
+						Label = "Prompt"
+					}
+				}
 			};
 
+			flicker.Register(menu);
 			flicker.Register(text);
-			flicker.Register(text2);
 			flicker.Render();
-
-			Task.Run(async () =>
-			{
-				while (true)
-				{
-					await Task.Delay(100);
-					text.Text = Environment.TickCount.ToString();
-					text.Render();
-				}
-			});
-
-			Task.Run(async () =>
-			{
-				while (true)
-				{
-					await Task.Delay(1000);
-					text2.Text = Environment.TickCount.ToString();
-					text2.Render();
-
-					flicker.Render();
-				}
-			});
-
-			Console.ReadKey(false);
 		}
 	}
 }

@@ -8,6 +8,11 @@ namespace Flicker
 {
 	public interface IRenderable
 	{
-		void Render();
+		Renderer AssociatedRenderer { get; set; }
+
+		void Render(bool selected);
+		void HandleKey(ConsoleKeyInfo key);
+		void Select();
+		void Destroy();
 	}
 }

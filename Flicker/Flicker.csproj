@@ -47,6 +47,8 @@
     <Compile Include="IRenderable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer.cs" />
+    <Compile Include="MenuElement.cs" />
+    <Compile Include="InputElement.cs" />
     <Compile Include="TextElement.cs" />
     <Compile Include="Tools.cs" />
   </ItemGroup>

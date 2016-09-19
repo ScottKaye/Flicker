@@ -27,7 +27,7 @@ namespace Flicker
 			{
 				Console.Write(line);
 				++Console.CursorTop;
-				Console.CursorLeft = (Console.CursorLeft - Width - Padding * 4).Clamp(0);
+				Console.CursorLeft = X + Padding * 2;
 			}
 		}
 	}
