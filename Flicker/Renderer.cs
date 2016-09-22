@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace Flicker
 {
 	public class Renderer
 	{
-		private List<IRenderable> RenderItems { get; set; } = new List<IRenderable>();
-		private int SelectedIndex { get; set; }
-
 		public Renderer()
 		{
 			// Make buffer the size of the window
@@ -16,6 +12,9 @@ namespace Flicker
 			Console.BufferHeight = Console.WindowHeight;
 			Console.CursorVisible = false;
 		}
+
+		private List<IRenderable> RenderItems { get; } = new List<IRenderable>();
+		private int SelectedIndex { get; set; }
 
 		public void Render()
 		{
@@ -27,9 +26,7 @@ namespace Flicker
 				try
 				{
 					foreach (var el in RenderItems)
-					{
 						el.Render(RenderItems[SelectedIndex] == el);
-					}
 				}
 				catch
 				{
@@ -60,7 +57,6 @@ namespace Flicker
 				return;
 			}
 
-			Debug.WriteLine("Forwarding keypress");
 			RenderItems[SelectedIndex].HandleKey(key);
 		}
 

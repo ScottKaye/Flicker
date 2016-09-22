@@ -5,15 +5,14 @@ namespace Flicker
 {
 	public class MenuElement : Element
 	{
-		public List<MenuItem> Items { get; set; } = new List<MenuItem>();
-		private int SelectedIndex { get; set; }
-
 		public MenuElement(int x, int y, int width, int height)
-			: base(x, y, width, height)
-		{ }
+			: base(x, y, width, height) { }
 
 		public MenuElement(float x, float y, float width, float height)
 			: base(x, y, width, height) { }
+
+		public List<MenuItem> Items { get; set; } = new List<MenuItem>();
+		private int SelectedIndex { get; set; }
 
 		public override void HandleKey(ConsoleKeyInfo key)
 		{
@@ -35,7 +34,7 @@ namespace Flicker
 
 		protected override void CustomRender()
 		{
-			for (int i = 0; i < Items.Count; ++i)
+			for (var i = 0; i < Items.Count; ++i)
 			{
 				Console.BackgroundColor = Background;
 				Console.ForegroundColor = Foreground;

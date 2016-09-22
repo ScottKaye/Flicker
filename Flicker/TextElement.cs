@@ -4,14 +4,14 @@ namespace Flicker
 {
 	public class TextElement : Element
 	{
-		public string Text { get; set; } = "";
-		public bool Wrap { get; set; } = true;
-
 		public TextElement(int x, int y, int width, int height)
 			: base(x, y, width, height) { }
 
 		public TextElement(float x, float y, float width, float height)
 			: base(x, y, width, height) { }
+
+		public string Text { get; set; } = "";
+		public bool Wrap { get; set; } = true;
 
 		protected override void CustomRender()
 		{

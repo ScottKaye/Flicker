@@ -4,18 +4,12 @@ namespace Flicker
 {
 	public abstract class Element : IRenderable
 	{
+		public readonly int Height;
+		public readonly int Width;
 		public readonly int X;
 		public readonly int Y;
-		public readonly int Width;
-		public readonly int Height;
-		public bool Visible { get; set; } = true;
-		public char Border { get; set; } = ' ';
-		public int Padding { get; set; } = 1; // Must be at least 1 (to make room for header), TODO enforce this
-		public ConsoleColor Foreground { get; set; } = ConsoleColor.White;
-		public ConsoleColor Background { get; set; } = ConsoleColor.Black;
-		public Renderer AssociatedRenderer { get; set; }
 
-		public Element(int x, int y, int width, int height)
+		protected Element(int x, int y, int width, int height)
 		{
 			X = x;
 			Y = y;
@@ -23,8 +17,7 @@ namespace Flicker
 			Height = height;
 		}
 
-		// TODO float constructor that uses percentages of Console.BufferWidth and Height
-		public Element(float x, float y, float width, float height)
+		protected Element(float x, float y, float width, float height)
 		{
 			x = x.Clamp(0, .99f);
 			y = y.Clamp(0, .99f);
@@ -37,18 +30,17 @@ namespace Flicker
 			Height = (int)(Console.BufferHeight * height);
 		}
 
-		protected virtual void CustomRender()
-		{
-			return;
-		}
+		public bool Visible { get; set; } = true;
+		public char Border { get; set; } = ' ';
+		public int Padding { get; set; } = 1; // Must be at least 1 (to make room for header), TODO enforce this
+		public ConsoleColor Foreground { get; set; } = ConsoleColor.White;
+		public ConsoleColor Background { get; set; } = ConsoleColor.Black;
+		public Renderer AssociatedRenderer { get; set; }
 
-		public virtual void HandleKey(ConsoleKeyInfo key)
-		{
-			return;
-		}
+		public virtual void HandleKey(ConsoleKeyInfo key) { }
 
 		/// <summary>
-		/// Draw this element
+		///     Draw this element
 		/// </summary>
 		void IRenderable.Render(bool selected)
 		{
@@ -78,7 +70,7 @@ namespace Flicker
 				Console.Write(new string(Border, Width));
 
 				// Left and right borders
-				for (int y = Y; y < Y + Height - 1; ++y)
+				for (var y = Y; y < Y + Height - 1; ++y)
 				{
 					Tools.Console.WriteAt(X, y, Border.ToString());
 					Tools.Console.WriteAt(X + Width - 1, y, Border.ToString());
@@ -86,13 +78,11 @@ namespace Flicker
 			}
 
 			if (selected)
-			{
 				Tools.Console.WriteAt(
 					X, Y,
 					new string('\u2580', Width),
 					ConsoleColor.Red
 				);
-			}
 
 			Console.CursorLeft = X + Padding * 2;
 			Console.CursorTop = Y + Padding;
@@ -105,5 +95,7 @@ namespace Flicker
 		public void Select() => AssociatedRenderer.Select(this);
 
 		public void Destroy() => AssociatedRenderer.Destroy(this);
+
+		protected virtual void CustomRender() { }
 	}
 }

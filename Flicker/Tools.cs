@@ -6,19 +6,24 @@ namespace Flicker
 	{
 		public static T Clamp<T>(this T val, T min)
 			where T : IComparable<T> =>
-				val.CompareTo(min) < 0 ? min
-					: val;
+			val.CompareTo(min) < 0
+				? min
+				: val;
 
 		public static T Clamp<T>(this T val, T min, T max)
 			where T : IComparable<T> =>
-				val.CompareTo(min) < 0 ? min
-					: val.CompareTo(max) > 0 ? max
+			val.CompareTo(min) < 0
+				? min
+				: val.CompareTo(max) > 0
+					? max
 					: val;
 
 		public static T Wrap<T>(this T val, T min, T max)
 			where T : IComparable<T> =>
-				val.CompareTo(min) < 0 ? max
-					: val.CompareTo(max) > 0 ? min
+			val.CompareTo(min) < 0
+				? max
+				: val.CompareTo(max) > 0
+					? min
 					: val;
 
 		public static class Console
@@ -40,13 +45,9 @@ namespace Flicker
 
 			public static void Fill(int x, int y, int width, int height, char c)
 			{
-				for (int i = x; i < x + width; ++i)
-				{
-					for (int j = y; j < y + height; ++j)
-					{
+				for (var i = x; i < x + width; ++i)
+					for (var j = y; j < y + height; ++j)
 						WriteAt(i, j, c.ToString());
-					}
-				}
 			}
 
 			public static void Fill(int x, int y, int width, int height, char c, ConsoleColor colour)

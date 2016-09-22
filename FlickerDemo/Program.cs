@@ -1,11 +1,11 @@
-﻿using Flicker;
-using System;
+﻿using System;
+using Flicker;
 
 namespace FlickerDemo
 {
-	class Program
+	internal class Program
 	{
-		static void Main(string[] args)
+		private static void Main(string[] args)
 		{
 			var flicker = new Renderer();
 			var text = new TextElement(15, 10, 20, 5)
@@ -21,26 +21,17 @@ namespace FlickerDemo
 				{
 					new MenuItem
 					{
-						Method = () =>
-						{
-							text.Visible = !text.Visible;
-						},
+						Method = () => { text.Visible = !text.Visible; },
 						Label = "Toggle text"
 					},
 					new MenuItem
 					{
-						Method = () =>
-						{
-							text.Select();
-						},
+						Method = () => { text.Select(); },
 						Label = "Select text"
 					},
 					new MenuItem
 					{
-						Method = () =>
-						{
-							text.Text = Environment.TickCount.ToString();
-						},
+						Method = () => { text.Text = Environment.TickCount.ToString(); },
 						Label = "Update text"
 					},
 					new MenuItem
